@@ -54,7 +54,15 @@ public class SearchDomain {
 	private List<String> buildDomain() throws SearchDomainException {
 		List<String> files = new ArrayList<>();
 		// Step Three: Complete the buildDomain method
-
+		try {
+			for (String file: files) {
+				String fileName = "";
+				fileName += file;
+				System.out.println(fileName);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 
 			
 		return files;
