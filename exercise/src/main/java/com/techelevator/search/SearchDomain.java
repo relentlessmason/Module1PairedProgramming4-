@@ -15,10 +15,10 @@ public class SearchDomain {
 
 	private String folder;
 	private List<String> files;
-	
+
 	/**
 	 * Create a Search Domain of a folder
-	 * 
+	 *
 	 * @param folder
 	 * @throws SearchDomainException
 	 */
@@ -26,7 +26,7 @@ public class SearchDomain {
 		this.folder = folder;
 		this.files = buildDomain();
 	}
-	
+
 	public String getFolder() {
 		return folder;
 	}
@@ -44,15 +44,14 @@ public class SearchDomain {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Folders are NOT recursively searched.
-	 * 
+	 *
 	 * @return
 	 * @throws SearchDomainException
 	 */
 	private List<String> buildDomain() throws SearchDomainException {
-		// Step Three: Complete the buildDomain method
 		List<String> fileList = new ArrayList<>();
 		try {
 			File workingDirectory = new File(folder);
@@ -67,5 +66,4 @@ public class SearchDomain {
 		}
 		return fileList;
 	}
-	
 }

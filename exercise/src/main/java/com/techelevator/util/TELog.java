@@ -4,9 +4,11 @@ import java.io.*;
 import java.util.Scanner;
 
 public class TELog {
-    public static void log(String message){
-        String logPath = "\\logs\\search.log";
-        File logFile = new File(logPath);
+    static final boolean APPEND_TO_FILE = true;
+
+    public static void log(String message) {
+        String logDirectory = "./logs/search.log";
+        File logFile = new File(logDirectory);
 
         if (!logFile.exists()) {
             try {
@@ -21,13 +23,12 @@ public class TELog {
         }
 
         if (logFile.exists()) {
-            try (PrintWriter writeToFile = new PrintWriter(new FileOutputStream (logFile, true))){
+            try (PrintWriter writeToFile = new PrintWriter(new FileOutputStream(logFile, APPEND_TO_FILE))) {
                 writeToFile.println(message);
-            } catch (Exception e)  {
+            } catch (Exception e) {
                 throw new TELogException(e.getMessage());
             }
         }
     }
 }
-
 
