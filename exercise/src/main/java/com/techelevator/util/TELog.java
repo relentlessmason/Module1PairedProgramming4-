@@ -4,31 +4,29 @@ import java.io.*;
 import java.util.Scanner;
 
 public class TELog {
-    public static void log(String message) {
-        String logDirectory = "./logs/search.log";
-        File logFile = new File(logDirectory);
+    public static void log(String message){
+        String logPath = "\\logs\\search.log";
+        File logFile = new File(logPath);
 
         if (!logFile.exists()) {
             try {
-                logFile.createNewFile();
+                boolean createLogFile = logFile.createNewFile();
                 System.out.println("Log file does not exist. File created.");
-            }catch (Exception e) {
-                System.err.println(e.getMessage());
+                if (!createLogFile) {
+                    throw new TELogException("Cannot create a log file.");
+                }
+            } catch (Exception e) {
+                throw new TELogException(e.getMessage());
             }
         }
 
         if (logFile.exists()) {
             try (PrintWriter writeToFile = new PrintWriter(new FileOutputStream (logFile, true))){
                 writeToFile.println(message);
-            } catch (TELogException| FileNotFoundException e)  {
-                System.err.println(e.getMessage());
-
+            } catch (Exception e)  {
+                throw new TELogException(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        log("A message");
     }
 }
 

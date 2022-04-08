@@ -52,20 +52,20 @@ public class SearchDomain {
 	 * @throws SearchDomainException
 	 */
 	private List<String> buildDomain() throws SearchDomainException {
-		List<String> files = new ArrayList<>();
 		// Step Three: Complete the buildDomain method
+		List<String> fileList = new ArrayList<>();
 		try {
-			for (String file: files) {
-				String fileName = "";
-				fileName += file;
-				System.out.println(fileName);
+			File workingDirectory = new File(folder);
+			File[] fileArray = workingDirectory.listFiles();
+			if (fileArray != null) {
+				for (File file : fileArray) {
+					fileList.add(file.getName());
+				}
 			}
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			throw new SearchDomainException(e.getMessage());
 		}
-
-			
-		return files;
+		return fileList;
 	}
 	
 }

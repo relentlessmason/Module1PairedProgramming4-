@@ -25,23 +25,20 @@ public class SearchEngine {
 	
 	public void indexFiles() throws SearchEngineException, Exception {
 		try {
+			int fileId = -1;
 			for (String file: sd.getFiles())  {
-				File fileObj = new File(file);
-				Scanner readFile = new Scanner(fileObj);
-				int fileId = 0;
-				while (readFile.hasNextLine()) {
-					fileId++;
-					String string = readFile.nextLine();
-					indexWords(fileId, string);
-					TELog.log(indexedWordsToString());
+				File currentFile = new File(sd.getFolder() + "/" + file);
+				Scanner thisFile = new Scanner(currentFile);
+				fileId++;
+				while (thisFile.hasNextLine()) {
+					String line = thisFile.nextLine();
+					indexWords(fileId, line);
 				}
 			}
-
+			TELog.log(indexedWordsToString());
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-
-
 	}
 	
 	public List<String> search(String searchString) {
